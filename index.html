@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "utf-8">
+    <title>TO-DO</title>
+
+    <link rel = "stylesheet" href = "css/bootstrap.css" type = "text/css" />
+     <script  src = "js/bootstrap.js"></script>
+    <script src="librerias/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+
+       function deleteElement(id)
+      {
+        $("#"+id).closest('li').remove();
+
+      }
+
+       function save(id,contador)
+        {
+            var value  = $("#txtUp").val();
+            $(" #"+id).replaceWith('<li id = "ele'+contador+'"><a href="#" onclick = updateElement("ele'+contador+'","'+value+'","'+contador+'")><h3>'+value+'</a> <button id = "delete'+contador+'" class = "btn btn-danger" onclick = deleteElement("delete'+contador+'")>Delete</button></h3></li>');
+        }
+
+      function updateElement(id,value,contador)
+      {
+        $("#"+id).replaceWith('<li id = "'+id+'" ><input type = "text" id = "txtUp" value = "'+value+'"/><button id = "btnUpdate" class = "btn btn-info" onclick = save("'+id+'","'+contador+'") >ok</button></li>');
+
+      }
+
+      $(document).ready(function()
+      {
+
+        var contador = "";
+
+        $("#btnAdd").click(function()
+        {
+          var task = $("#txtNew").val();
+
+          if(task != "")
+          {
+            contador++;
+            $("#myList").append('<li id = "ele'+contador+'"><a href="#" onclick = updateElement("ele'+contador+'","'+task+'","'+contador+'")><h3>'+task+'</a> <button id = "delete'+contador+'" class = "btn btn-danger" onclick = deleteElement("delete'+contador+'")>Delete</button></h3></li>');
+            $("#txtNew").val("");
+          }
+
+        });
+
+      });
+
+    </script>
+  
+  </head>
+  <body>
+     <div class="container">
+        <h1><a href="#"> ToDo List</a></h1>
+        <header class = "navbar fixed"> 
+        </header>
+        <div class="hero-unit">
+            <div class="container">
+              <ul id="myList">
+              </ul>
+            </div>
+        <div id = "divAdd">
+              <input type="text" placeholder="Enter a new task" id = "txtNew"/>
+              <button class = "btn btn-info" id = "btnAdd">Add</button>
+      </div>
+        </div>
+           <hr>
+      <div class="footer">
+        <p>&copy:Katerina  2014</p>
+      </div>
+      </div>
+  </body>
+
+</html>
